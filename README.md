@@ -286,4 +286,4 @@ If you have any questions or need help:
 
 ---
 
-**Built with ❤️ for the academic community**\n
+**Built with ❤️ by Raghav Thakur for the academic community**\n
