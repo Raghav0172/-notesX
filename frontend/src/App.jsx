@@ -1,21 +1,49 @@
 import React from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import NoteList from './pages/NoteList';
 import UploadNote from './pages/UploadNote';
+import './App.css';
 
 function App() {
+  const location = useLocation();
+
   return (
-    <div style={{ fontFamily: 'Arial, sans-serif', maxWidth: 1024, margin: '0 auto', padding: 16 }}>
-      <header>
-        <h1>NotesX</h1>
-        <nav style={{ marginBottom: 16 }}>
-          <Link to="/">Browse Notes</Link> | <Link to="/upload">Upload Note</Link>
-        </nav>
+    <div className="app">
+      <header className="header">
+        <div className="container flex-between">
+          <div className="brand">
+            <h1>📚 NotesX</h1>
+            <p className="text-muted">University Notes Sharing Platform</p>
+          </div>
+          <nav className="navbar">
+            <Link 
+              to="/" 
+              className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}
+            >
+              Browse Notes
+            </Link>
+            <Link 
+              to="/upload" 
+              className={`nav-link ${location.pathname === '/upload' ? 'active' : ''}`}
+            >
+              Upload Note
+            </Link>
+          </nav>
+        </div>
       </header>
-      <Routes>
-        <Route path="/" element={<NoteList />} />
-        <Route path="/upload" element={<UploadNote />} />
-      </Routes>
+
+      <main className="main-content">
+        <Routes>
+          <Route path="/" element={<NoteList />} />
+          <Route path="/upload" element={<UploadNote />} />
+        </Routes>
+      </main>
+
+      <footer className="footer">
+        <div className="container text-center">
+          <p className="text-muted">© 2025 NotesX. Built with ❤️ for the academic community.</p>
+        </div>
+      </footer>
     </div>
   );
 }
