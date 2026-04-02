@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://notes-x-19nq-3kfj0m1qk-raghav0172s-projects.vercel.app';
+
 function NoteList() {
   const [notes, setNotes] = useState([]);
   const [query, setQuery] = useState('');
@@ -9,7 +11,7 @@ function NoteList() {
   const getNotes = async () => {
     setLoading(true);
     try {
-      const { data } = await axios.get('/api/notes', { params: { search: query, sort: 'latest' } });
+      const { data } = await axios.get(`${API_BASE_URL}/api/notes`, { params: { search: query, sort: 'latest' } });
       setNotes(data);
     } catch (err) {
       console.error(err);
@@ -30,7 +32,7 @@ function NoteList() {
 
   const addDownload = async (id) => {
     try {
-      await axios.put(`/api/notes/${id}/download`);
+      await axios.put(`${API_BASE_URL}/api/notes/${id}/download`);
     } catch (err) {
       console.error(err);
     }

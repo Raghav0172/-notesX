@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://notes-x-19nq-3kfj0m1qk-raghav0172s-projects.vercel.app';
+
 function UploadNote() {
   const [form, setForm] = useState({
     title: '', department: '', year: '', subject: '', topic: '', description: '', tags: ''
@@ -25,7 +27,7 @@ function UploadNote() {
       formData.append('file', file);
       Object.keys(form).forEach((k) => formData.append(k, form[k]));
 
-      await axios.post('/api/notes', formData, {
+      await axios.post(`${API_BASE_URL}/api/notes`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`
